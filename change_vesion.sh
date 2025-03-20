@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the deployment file path
-DEPLOYMENT_FILE="manifests/deployment.yaml"
+DEPLOYMENT_FILE="manifests/application.yaml"
 
 # Check if the file exists
 if [ ! -f "$DEPLOYMENT_FILE" ]; then
@@ -9,7 +9,7 @@ if [ ! -f "$DEPLOYMENT_FILE" ]; then
     exit 1
 fi
 
-# Detect current version in deployment.yaml (ignores comments)
+# Detect current version in application.yaml (ignores comments)
 CURRENT_VERSION=$(grep "image: torpoly/flask-rpol:" "$DEPLOYMENT_FILE" | awk -F ':' '{print $NF}' | tr -d '[:space:]')
 
 # Validate extracted version
@@ -28,11 +28,11 @@ fi
 # Print the version change
 echo "🔄 Switching from version $CURRENT_VERSION to $NEW_VERSION in $DEPLOYMENT_FILE"
 
-# Update the version in deployment.yaml
+# Update the version in application.yaml
 sed -i "s|image: torpoly/flask-rpol:$CURRENT_VERSION|image: torpoly/flask-rpol:$NEW_VERSION|g" "$DEPLOYMENT_FILE"
 
 # Confirm the change
-echo "✅ Updated deployment.yaml:"
+echo "✅ Updated application.yaml:"
 grep "image: torpoly/flask-rpol:" "$DEPLOYMENT_FILE"
 
 # Git commit and push

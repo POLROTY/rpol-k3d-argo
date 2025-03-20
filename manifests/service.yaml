@@ -8,6 +8,6 @@ spec:
     app: flask-app
   ports:
     - protocol: TCP
-      port: 80      # External port exposed by the service
-      targetPort: 8080  # Internal port in the container
+      port: 8888      # External port exposed by the service
+      targetPort: 8888  # Internal port in the container
   type: LoadBalancer

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: torpoly/flask-rpol:v2
+        image: torpoly/flask-rpol:v1
         ports:
         - containerPort: 8888
 ---
